@@ -41,6 +41,8 @@ define([
     }
 
     function wrapper (obj, child) {
+      var createTagForce = self.options.get('createTagForce') || false;
+
       var data = obj.results;
 
       for (var i = 0; i < data.length; i++) {
@@ -58,7 +60,7 @@ define([
 
         var checkText = optionText === paramsTerm;
 
-        if (checkText || checkChildren) {
+        if (!createTagForce && (checkText || checkChildren)) {
           if (child) {
             return false;
           }
