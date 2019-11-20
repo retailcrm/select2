@@ -3725,10 +3725,15 @@ S2.define('select2/data/tags',[
       var tag = self.createTag(params);
 
       if (tag != null) {
-        var $option = self.option(tag);
-        $option.attr('data-select2-tag', true);
+        // excludes create options with duplicate tag
+        if (
+          self.$element.find('option[value = "' + tag.id + '"]').length === 0
+        ) {
+          var $option = self.option(tag);
+          $option.attr('data-select2-tag', true);
 
-        self.addOptions([$option]);
+          self.addOptions([$option]);
+        }
 
         self.insertTag(data, tag);
       }
